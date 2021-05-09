@@ -28,5 +28,9 @@ Slide the slider, click the button. There really isn't much else to do :)
 
 Install manually using this URL:
 
-    https://github.com/ntoff/OctoPrint-fanspeedslider/archive/master.zip
+    https://github.com/bertugarangou/OctoPrint-fanspeedslider/archive/master.zip
+    
+## ABOUT
+
+This is a fork from the first OctoPrint Fan Speed Slider by NTOFF that's compatible with Python 3 since the main project is abandoned.
 
