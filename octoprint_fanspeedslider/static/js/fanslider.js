@@ -167,6 +167,19 @@ $(function () {
 			}
 		}
 
+		self.onDataUpdaterPluginMessage = function(plugin, data) {
+			if (plugin != "fanspeedslider") {
+				return;
+			}
+
+			if(data.hasOwnProperty('fanPwm')){
+				console.log("received fanpwm: " + data.fanPwm)
+				self.control.fanSpeed(parseInt(data.fanPwm / 255 * 100));
+				self.settings.defaultFanSpeed(parseInt(data.fanPwm / 255 * 100));
+				self.settings.lastSentSpeed(parseInt(data.fanPwm / 255 * 100));
+			}
+		}
+
 		self.onBeforeBinding = function () {
 			self.settings.defaultFanSpeed(parseInt(self.settings.settings.plugins.fanspeedslider.defaultFanSpeed()));
 			self.settings.lastSentSpeed(parseInt(self.settings.settings.plugins.fanspeedslider.lastSentSpeed()));
@@ -183,7 +196,7 @@ $(function () {
 			}
 			else {
 				self.control.fanSpeed(self.settings.defaultFanSpeed());
-			}			
+			}
 		}
 
 		//update settings in case user changes them, otherwise a refresh of the UI is required
