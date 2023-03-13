@@ -113,12 +113,20 @@ class FanSliderPlugin(octoprint.plugin.StartupPlugin,
 			self._logger.info("A cooling fan control command was seen, but fanspeedslider is locked. Control command " + str(cmd) + " removed from queue.")
 			return None,
 
-	def render_m106(self, comm_instance, phase, cmd, cmd_type, gcode, *args, **kwargs):
+	def render_m106_sent(self, comm_instance, phase, cmd, cmd_type, gcode, *args, **kwargs):
 		if gcode and gcode.startswith(('M106', 'M107')):
 			fanPwm = re.search("S(\d+\.?\d*)", cmd)
 			if fanPwm and fanPwm.group(1):
 				self._plugin_manager.send_plugin_message(self._identifier, {'fanPwm': float(fanPwm.group(1))})
 			elif gcode == 'M107':
+				self._plugin_manager.send_plugin_message(self._identifier, {'fanPwm': 0})
+	
+	def render_m106_received(self, comm, line, *args, **kwargs):
+		if line and line.startswith(('M106', 'M107')):
+			fanPwm = re.search("S(\d+\.?\d*)", line)
+			if fanPwm and fanPwm.group(1):
+				self._plugin_manager.send_plugin_message(self._identifier, {'fanPwm': float(fanPwm.group(1))})
+			elif line == 'M107':
 				self._plugin_manager.send_plugin_message(self._identifier, {'fanPwm': 0})
 
 	def get_update_information(self):
@@ -147,7 +155,7 @@ def __plugin_load__():
 	global __plugin_hooks__
 	__plugin_hooks__ = {
 		"octoprint.comm.protocol.gcode.queuing": __plugin_implementation__.rewrite_m106,
-		"octoprint.comm.protocol.gcode.sent": __plugin_implementation__.render_m106,
-		"octoprint.comm.protocol.gcode.received": __plugin_implementation__.render_m106,
+		"octoprint.comm.protocol.gcode.sent": __plugin_implementation__.render_m106_sent,
+		"octoprint.comm.protocol.gcode.received": __plugin_implementation__.render_m106_received,
 		"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information
 	}
