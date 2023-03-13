@@ -128,6 +128,7 @@ class FanSliderPlugin(octoprint.plugin.StartupPlugin,
 				self._plugin_manager.send_plugin_message(self._identifier, {'fanPwm': float(fanPwm.group(1))})
 			elif line == 'M107':
 				self._plugin_manager.send_plugin_message(self._identifier, {'fanPwm': 0})
+		return line
 
 	def get_update_information(self):
 		return dict(
