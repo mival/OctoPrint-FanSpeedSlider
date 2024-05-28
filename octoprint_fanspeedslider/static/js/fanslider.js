@@ -84,11 +84,27 @@ $(function () {
 			}
 		};
 
+		self.control.increaseFanSpeed = function () {
+			self.control.checkSliderValue();
+			const currentValue = self.control.fanSpeed();
+			if (currentValue < 100) {
+				self.control.fanSpeed(currentValue + 1);
+			}
+		};
+
+		self.control.decreaseFanSpeed = function () {
+			self.control.checkSliderValue();
+			const currentValue = self.control.fanSpeed();
+			if (currentValue > 0) {
+				self.control.fanSpeed(currentValue - 1);
+			}
+		};
+
 		self.control.lockFanInput = function () {
 			self.settings.settings.plugins.fanspeedslider.lockfan(!self.settings.settings.plugins.fanspeedslider.lockfan());
 			self.settings.saveData();
 			self.updateSettings();
-			
+
 			var options = {
 				type: "info",
 				hide: true,
@@ -118,7 +134,13 @@ $(function () {
 				$("#fan-off").remove();
 				//add new fan controls
 				$("#control-jog-general").find("button").eq(0).before("\
-					<input type=\"number\" style=\"width: 95px\" data-bind=\"slider: {min: 00, max: 100, step: 1, value: fanSpeed, tooltip: 'hide'}\">\
+					<button class=\"btn\" style=\"padding: 3px;margin: 0 3px 8px 0;\" data-bind=\"click: function() { $root.decreaseFanSpeed() }\">\
+						<i class=\"fa fa-minus\"></i>\
+					</button>\
+					<input type=\"number\" style=\"width: 50px\" data-bind=\"slider: {min: 00, max: 100, step: 1, value: fanSpeed, tooltip: 'hide'}\">\
+					<button class=\"btn\" style=\"padding: 3px;margin: 0 0 8px 8px;\" data-bind=\"click: function() { $root.increaseFanSpeed() }\">\
+						<i class=\"fa fa-plus\"></i>\
+					</button>\
 					<button class=\"btn btn-block control-box\" id=\"fan-on\" data-bind=\"enable: isOperational() && loginState.isUser() && !islocked(), click: function() { $root.sendFanSpeed() }\">" + gettext("Fan speed") + ":<span data-bind=\"text: fanSpeed() + '%'\"></span></button>\
 					<div class=\"btn-group\">\
 						<button class=\"btn \" id=\"fan-off\" data-bind=\"enable: isOperational() && loginState.isUser() && !islocked(), click: function() { $root.sendCustomCommand({ type: 'command', commands: ['M106 S0'] }) }\">" + gettext("Fan off") + "</button>\

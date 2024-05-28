@@ -2,15 +2,15 @@
 
 Add a slider to control the speed of a parts cooling fan.
 
-![](./image/slider.JPG)
+![Slider](./image/slider.jpg)
 
 ## Usage
 
-Slide the slider, click the button. There really isn't much else to do :)
+Slide the slider or use plus and minus button, click the set button. There really isn't much else to do :)
 
 ## Settings
 
-* The default value of the slider is user configurable, this is the value that the slider will be set to upon loading OctoPrint's UI, and any time you refresh the page. 
+* The default value of the slider is user configurable, this is the value that the slider will be set to upon loading OctoPrint's UI, and any time you refresh the page.
 
 * The remember last speed checkbox will tell the plugin to save the fan speed as it gets sent to the printer, and set the slider to that value on load / refresh (overrides the default value setting).
 
@@ -28,9 +28,10 @@ Slide the slider, click the button. There really isn't much else to do :)
 
 Install manually using this URL:
 
-    https://github.com/bertugarangou/OctoPrint-fanspeedslider/archive/master.zip
-    
+    https://github.com/mival/OctoPrint-fanspeedslider/archive/master.zip
+
 ## ABOUT
 
 This is a fork from the first OctoPrint Fan Speed Slider by NTOFF that's compatible with Python 3 since the main project is abandoned.
 
+This fork added +/- buttons from https://github.com/czM1K3/OctoPrint-FanSpeedSlider
