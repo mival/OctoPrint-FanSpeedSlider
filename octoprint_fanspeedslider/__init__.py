@@ -9,7 +9,7 @@ class FanSliderPlugin(octoprint.plugin.StartupPlugin,
 					octoprint.plugin.TemplatePlugin,
 					octoprint.plugin.SettingsPlugin,
 					octoprint.plugin.AssetPlugin):
-					
+
 	def __init__(self):
 		self.minPWM=0,
 		self.maxPWM=255,
@@ -80,7 +80,7 @@ class FanSliderPlugin(octoprint.plugin.StartupPlugin,
 			js=["js/fanslider.js"],
 			css=["css/style.css"]
 		)
-	
+
 	def get_template_configs(self):
 		return [
 			dict(type="settings", custom_bindings=False)
@@ -120,7 +120,7 @@ class FanSliderPlugin(octoprint.plugin.StartupPlugin,
 				self._plugin_manager.send_plugin_message(self._identifier, {'fanPwm': float(fanPwm.group(1))})
 			elif gcode == 'M107':
 				self._plugin_manager.send_plugin_message(self._identifier, {'fanPwm': 0})
-	
+
 	def render_m106_received(self, comm, line, *args, **kwargs):
 		if line and line.startswith(('M106', 'M107')):
 			fanPwm = re.search("S(\d+\.?\d*)", line)
@@ -138,12 +138,12 @@ class FanSliderPlugin(octoprint.plugin.StartupPlugin,
 
 				# version check: github repository
 				type="github_release",
-				user="ntoff",
+				user="mival",
 				repo="OctoPrint-FanSpeedSlider",
 				current=self._plugin_version,
 
 				# update method: pip
-				pip="https://github.com/ntoff/OctoPrint-FanSpeedSlider/archive/{target_version}.zip"
+				pip="https://github.com/mival/OctoPrint-FanSpeedSlider/archive/{target_version}.zip"
 			)
 		)
 
@@ -152,7 +152,7 @@ __plugin_pythoncompat__ = ">=2.7,<4"
 def __plugin_load__():
 	global __plugin_implementation__
 	__plugin_implementation__ = __plugin_implementation__ = FanSliderPlugin()
-	
+
 	global __plugin_hooks__
 	__plugin_hooks__ = {
 		"octoprint.comm.protocol.gcode.queuing": __plugin_implementation__.rewrite_m106,
