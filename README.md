@@ -28,7 +28,7 @@ Slide the slider or use plus and minus button, click the set button. There reall
 
 Install manually using this URL:
 
-    https://github.com/mival/OctoPrint-fanspeedslider/archive/master.zip
+    https://github.com/mival/OctoPrint-fanspeedslider/archive/main.zip
 
 ## ABOUT
 

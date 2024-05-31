@@ -12,7 +12,7 @@ date: 2017-12-02
 
 homepage: https://github.com/ntoff/OctoPrint-FanSpeedSlider
 source: https://github.com/ntoff/OctoPrint-FanSpeedSlider
-archive: https://github.com/ntoff/OctoPrint-FanSpeedSlider/archive/master.zip
+archive: https://github.com/ntoff/OctoPrint-FanSpeedSlider/archive/main.zip
 
 tags:
 - UI
